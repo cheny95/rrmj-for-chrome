@@ -41,6 +41,7 @@ ___
 #### v0.4
 * 优化判断播放来源
 * 可以直接打开播放(mp4源)
+![image](http://ww2.sinaimg.cn/large/005yrGU3gw1f8rusvwkwij30zo12gq94.jpg)
 
 #### v0.3
 * 搜索不到的提示
