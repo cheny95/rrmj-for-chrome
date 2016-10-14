@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="bs/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="bs/css/reset.css">-->
+    <meta charset="utf-8">
+    <title>RRMJ search</title>
+</head>
+<style>
+    body {
+        height: 580px;
+        overflow-y: scroll;;
+    }
+
+    #search {
+        width: 250px;
+        margin: 20px auto;
+        text-align: center;
+    }
+
+    .res-box {
+        width: 100%;
+        height: 450px;
+        text-align: center;
+        margin: 30px 0 40px 0;
+    }
+
+    .res {
+        min-width: 250px;
+        max-width: 400px;
+        height: 440px;
+        margin: 0 auto;
+    }
+
+    .copy {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 30px;
+        z-index: 999;
+        width: 100%;
+        background: #fff;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    .playStyle:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
+<body>
+<div id="search">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <input id="stxt" type="input" class="form-control" placeholder="请输入关键字…" value=""/>
+                <span class="input-group-btn">
+                     <button class="btn btn-info" id="sbtn" type="button">Go!</button>
+                 </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="res-box">
+    <ul id="list" class="list-group res" style="overflow: auto;">
+        <div style="margin-top: 30%;">
+            <img src="s.png" alt="" width="90%">
+        </div>
+    </ul>
+</div>
+
+
+<div class="copy text-info text-center">
+    <span>Update By <a href="http://www.7imc.com/" target="_blank" class="text-primary">Chan</a> From
+        <a href="https://github.com/wilsonwen/rrmj_chrome" target="_blank" class="text-primary">@Wilsonwen</a>
+    </span>
+</div>
+<script src="bs/js/jquery.min.js"></script>
+<script src="bs/js/bootstrap.min.js"></script>
+<script src="layer/layer.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

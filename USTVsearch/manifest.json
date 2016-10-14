@@ -1,0 +1,22 @@
+{
+  "name": "美剧搜索",
+  "description": "基于「rrmj」的一个美剧搜索插件.",
+  "version": "0.3",
+  "permissions": [
+    "http://api.rrmj.tv/"
+  ],
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": [
+        "background.js"
+      ]
+    }
+  },
+  "icons": {
+    "16": "play-16.png",
+    "32": "play-32.png",
+    "48": "play-48.png",
+    "128": "play-128.png"
+  }
+}
