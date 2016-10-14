@@ -4,7 +4,6 @@ ___
 
 ###「美剧搜索」是什么?
 一个谷歌浏览器的应用(chrome APP)，主要用于搜索美剧，且可以观看。
-78BC9D89-D383-47C2-969A-3E9B7539A2A6.gif
 
 ![image](https://github.com/cheny95/rrmj-for-chrome/raw/master/demo.gif)
 
