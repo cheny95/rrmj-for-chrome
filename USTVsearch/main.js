@@ -16,8 +16,22 @@ $(document).ready(function () {
                 "clientVersion": "99.99"
             },
             success: function (data) {
-                if (data.code = "0000" && data.data.m3u8) {
-                    $("#" + id + "_li").append("<a class='text-danger playStyle playV" + index + "' data-src ='" + data.data.m3u8.url + "' data-title='" + seasonTitle + element.episode + "'  target='_blank' href='" + data.data.m3u8.url + "'> <span class='label label-danger'>Play</span> </a>");
+                if (data.code = "0000" && data.data.m3u8 && data.data.m3u8.url != null && data.data.m3u8.source != 'QQ') {
+                    $("#" + id + "_li").append("<span class='label label-info' id='play' style='margin:0 5px;'>点击播放</span> <a class='text-danger playStyle playV" + index + "' data-src ='" + data.data.m3u8.url + "' data-title='" + seasonTitle + element.episode + "'  target='_blank' href='" + data.data.m3u8.url + "' style='margin:0 5px;'><span class='label label-danger'>浏览器播放</span></a>");
+
+                    $("#" + id + "_li #play").click(function () {
+                        if ($("#" + id + "_li #video") && $("#" + id + "_li #video").length > 0) {
+                            $("#" + id + "_li #video").remove();
+                            $("#" + id + "_li #resize").remove();
+                            return false;
+                        }
+                        $("#" + id + "_li").append("<span id='resize' style='margin-top:10px; display: block;'><botton class='btn btn-xs btn-default'>由于chrome机制，片源播放后请点我调整大小</botton></span>" +
+                            "<video src='" + data.data.m3u8.url + "' autoplay='true' controls='true' id='video'></video>");
+                        $('#resize').click(function () {
+                            $('video').css({width: '370px', marginTop: '10px'})
+                        })
+                    })
+
                 }
             }
         });
@@ -25,8 +39,6 @@ $(document).ready(function () {
     };
 
     var liHandler = function (index, element) {
-
-        console.log(element.title);
         var id = "episod" + index;
         var brief;
         if (element.brief) {
@@ -52,7 +64,6 @@ $(document).ready(function () {
                     "clientVersion": "99.99"
                 },
                 success: function (data) {
-                    console.log(data);
                     $("#list").empty();
                     $.each(data.data.season.episode_brief, videohandler);
                 }
@@ -76,7 +87,6 @@ $(document).ready(function () {
                 "clientVersion": "99.99"
             },
             success: function (data) {
-                console.log(data);
                 $("#list").empty();
                 if (data.data.results.length < 1) {
                     $("#list").html("<li class=''><span class='text-center text-warning'>没有搜索到…</span></li>");
@@ -85,7 +95,6 @@ $(document).ready(function () {
                 $.each(data.data.results, liHandler);
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                console.log('error');
                 console.log(textStatus);
                 console.log(errorThrown);
             }
