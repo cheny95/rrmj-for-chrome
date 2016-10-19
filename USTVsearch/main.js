@@ -16,7 +16,7 @@ $(document).ready(function () {
                 "clientVersion": "99.99"
             },
             success: function (data) {
-                if (data.code = "0000" && data.data.m3u8 && data.data.m3u8.url != null && data.data.m3u8.source != 'QQ') {
+                if (data.code = "0000" && data.data.m3u8 && data.data.m3u8.url != null && data.data.m3u8.source != 'QQ' && data.data.m3u8.source != '优酷网') {
                     $("#" + id + "_li").append("<span class='label label-info' id='play' style='margin:0 5px;'>点击播放</span> <a class='text-danger playStyle playV" + index + "' data-src ='" + data.data.m3u8.url + "' data-title='" + seasonTitle + element.episode + "'  target='_blank' href='" + data.data.m3u8.url + "' style='margin:0 5px;'><span class='label label-danger'>浏览器播放</span></a>");
 
                     $("#" + id + "_li #play").click(function () {

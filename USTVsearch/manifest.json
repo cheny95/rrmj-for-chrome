@@ -1,7 +1,7 @@
 {
   "name": "美剧搜索",
   "description": "基于「rrmj」的一个美剧搜索插件.",
-  "version": "0.4",
+  "version": "0.5",
   "permissions": [
     "http://api.rrmj.tv/",
     "fullscreen"
