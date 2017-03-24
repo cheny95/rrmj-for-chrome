@@ -5,37 +5,25 @@ $(document).ready(function () {
 
     var videohandler = function (index, element) {
         var id = "episod" + index;
-        $("#list").append("<li class=\"list-group-item list-group-item-warning\"  id=\"" + id + "_li\" >" + seasonTitle + " 第" + element.episode + "集</li>");
+        var e = index + 1;
+        var url = element.playLink;
+        $("#list").append("<li class=\"list-group-item list-group-item-warning\"  id=\"" + id + "_li\" >" + seasonTitle + " 第" + e + "集</li>");
 
-        // $("#" + id).click(function () {
-        $.ajax({
-            type: 'POST',
-            url: "http://api.rrmj.tv/video/findM3u8ByEpisodeSid",
-            data: "seasonId=" + seasonId + '&episodeSid=' + element.sid + '&quality=high',
-            headers: {
-                "clientVersion": "99.99"
-            },
-            success: function (data) {
-                if (data.code = "0000" && data.data.m3u8 && data.data.m3u8.url != null && data.data.m3u8.source != 'QQ' && data.data.m3u8.source != '优酷网') {
-                    $("#" + id + "_li").append("<span class='label label-info' id='play' style='margin:0 5px;'>点击播放</span> <a class='text-danger playStyle playV" + index + "' data-src ='" + data.data.m3u8.url + "' data-title='" + seasonTitle + element.episode + "'  target='_blank' href='" + data.data.m3u8.url + "' style='margin:0 5px;'><span class='label label-danger'>浏览器播放</span></a>");
+        $("#" + id + "_li").append("<span class='label label-info' id='play' style='margin:0 5px;'>点击播放</span> <a class='text-danger playStyle playV" + index + "' data-src ='" + url + "' data-title='" + seasonTitle + e + "'  target='_blank' href='" +url + "' style='margin:0 5px;'><span class='label label-danger'>浏览器播放</span></a>");
 
-                    $("#" + id + "_li #play").click(function () {
-                        if ($("#" + id + "_li #video") && $("#" + id + "_li #video").length > 0) {
-                            $("#" + id + "_li #video").remove();
-                            $("#" + id + "_li #resize").remove();
-                            return false;
-                        }
-                        $("#" + id + "_li").append("<span id='resize' style='margin-top:10px; display: block;'><botton class='btn btn-xs btn-default'>由于chrome机制，片源播放后请点我调整大小</botton></span>" +
-                            "<video src='" + data.data.m3u8.url + "' autoplay='true' controls='true' id='video'></video>");
-                        $('#resize').click(function () {
-                            $('video').css({width: '370px', marginTop: '10px'})
-                        })
-                    })
-
-                }
+        $("#" + id + "_li #play").click(function () {
+            if ($("#" + id + "_li #video") && $("#" + id + "_li #video").length > 0) {
+                $("#" + id + "_li #video").remove();
+                $("#" + id + "_li #resize").remove();
+                return false;
             }
-        });
-        // })
+            $("#" + id + "_li").append("<span id='resize' style='margin-top:10px; display: block;'><botton class='btn btn-xs btn-default'>由于chrome机制，片源播放后请点我调整大小</botton></span>" +
+                "<video src='" + url + "' autoplay='true' controls='true' id='video'></video>");
+            $('#resize').click(function () {
+                $('video').css({width: '370px', marginTop: '10px'})
+            })
+        })
+
     };
 
     var liHandler = function (index, element) {
@@ -65,7 +53,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     $("#list").empty();
-                    $.each(data.data.season.episode_brief, videohandler);
+                    $.each(data.data.season.playUrlList, videohandler);
                 }
             })
         };
@@ -101,6 +89,7 @@ $(document).ready(function () {
         });
     };
     $("#sbtn").click(handler);
+    // $("#sbtn").click(resBaby);
     $("#stxt").keypress(function (e) {
         var keycode = event.keyCode ? event.keyCode : event.which;
         if (keycode == 13) {
