@@ -1,9 +1,9 @@
 {
-  "name": "美剧搜索",
-  "description": "基于「rrmj」的一个美剧搜索插件.",
+  "name": "USTV With RRSP",
+  "description": "基于「RRSP」的一个美剧搜索插件(由于接口问题,现在只能搜索片段).",
   "version": "0.6",
   "permissions": [
-    "http://api.rrmj.tv/",
+    "http://www.rr.tv/",
     "fullscreen"
   ],
   "manifest_version": 2,

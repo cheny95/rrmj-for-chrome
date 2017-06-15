@@ -6,8 +6,8 @@ $(document).ready(function () {
     var videohandler = function (index, element) {
         var id = "episod" + index;
         var e = index + 1;
-        var url = element.playLink;
-        $("#list").append("<li class=\"list-group-item list-group-item-warning\"  id=\"" + id + "_li\" >" + seasonTitle + " 第" + e + "集</li>");
+        var url = element;
+        $("#list").append("<li class=\"list-group-item list-group-item-warning\"  id=\"" + id + "_li\" ><span class=\"titles\">" + seasonTitle +"</span></li>");
 
         $("#" + id + "_li").append("<span class='label label-info' id='play' style='margin:0 5px;'>点击播放</span> <a class='text-danger playStyle playV" + index + "' data-src ='" + url + "' data-title='" + seasonTitle + e + "'  target='_blank' href='" +url + "' style='margin:0 5px;'><span class='label label-danger'>浏览器播放</span></a>");
 
@@ -36,24 +36,27 @@ $(document).ready(function () {
         }
         $("#list").append("<div class=\"list-group list-group-item-warning\">" +
             "  <a href=\"#\" class=\"list-group-item active\" id=\"" + id + "\">" +
-            "    <h3 class=\"list-group-item-heading\">" + element.title + "</h3>" +
+            "    <h4 class=\"list-group-item-heading\">"+(index+1)+". [" +element.duration+"] "+ element.title + "</h4>" +
             "    <p class=\"list-group-item-text text-left\">" + brief + "</p>" +
             "  </a>" +
             "</div>"
         );
         var epHandler = function () {
-            seasonTitle = $(this).find('h3').html();
+            seasonTitle = $(this).find('h4').html();
             seasonId = element.id;
             $.ajax({
                 type: 'POST',
-                url: "http://api.rrmj.tv/season/detail/",
-                data: "seasonId=" + element.id,
+                // url: "http://api.rrmj.tv/season/detail/",
+                url: "http://web.rr.tv/v3plus/video/getVideoPlayLinkByVideoId",
+                data: "videoId=" + element.id,
                 headers: {
-                    "clientVersion": "99.99"
+                    "clientVersion": "0.1.0",
+                    "clientType":"web"
                 },
                 success: function (data) {
                     $("#list").empty();
-                    $.each(data.data.season.playUrlList, videohandler);
+                    // $.each(data.data.season.playUrlList, videohandler);
+                    videohandler(seasonId,data.data.playLink);
                 }
             })
         };
@@ -69,10 +72,12 @@ $(document).ready(function () {
         }
         $.ajax({
             type: 'POST',
-            url: "http://api.rrmj.tv/season/search/",
-            data: "page=1&rows=20&name=" + keyword,
+            // url: "http://api.rrmj.tv/season/search/",
+            url: "http://web.rr.tv/v3plus/search/video/",
+            data: "keyword=" + keyword,
             headers: {
-                "clientVersion": "99.99"
+                "clientVersion": "0.1.0",
+                "clientType":"web"
             },
             success: function (data) {
                 $("#list").empty();
